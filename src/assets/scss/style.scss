@@ -1,0 +1,21 @@
+@import 'fonts';
+
+$fontFamily: 'Inter', sans-serif;
+$fontSize: rem(16);
+
+@import 'null';
+
+[class*='__container'] {
+	@if $maxWidthContainer > 0 {
+		box-sizing: content-box;
+		max-width: rem($maxWidthContainer);
+		padding-right: rem(20);
+		padding-left: rem(20);
+		margin: 0 auto;
+
+		@media (max-width: $mobile) {
+			padding-right: rem(15);
+			padding-left: rem(15);
+		}
+	}
+}
