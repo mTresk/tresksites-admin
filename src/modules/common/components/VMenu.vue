@@ -86,7 +86,7 @@ const menuItems = [
 		}
 
 		&.router-link-active {
-			color: #7254f3;
+			color: $accentColor;
 			background-color: #f3f4f6;
 
 			.dark & {
