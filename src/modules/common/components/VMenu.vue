@@ -17,6 +17,11 @@ const menuItems = [
 				icon: 'pi pi-th-large',
 				route: 'services',
 			},
+			{
+				label: 'Контакты',
+				icon: 'pi pi-id-card',
+				route: 'contacts',
+			},
 		],
 	},
 ]

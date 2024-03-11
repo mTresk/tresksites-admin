@@ -58,11 +58,11 @@ watch(
 	() => {
 		files.value = [
 			{
-				source: props.model.images.original,
+				source: props.model.files?.original,
 				options: {
 					type: 'local',
 					metadata: {
-						poster: props.model.images.original,
+						poster: props.model.files?.original,
 					},
 				},
 			},
@@ -70,14 +70,14 @@ watch(
 	},
 )
 
-if (props.model.images) {
+if (props.model.files) {
 	files.value = [
 		{
-			source: props.model.images?.original,
+			source: props.model.files?.original,
 			options: {
 				type: 'local',
 				metadata: {
-					poster: props.model.images?.original,
+					poster: props.model.files?.original,
 				},
 			},
 		},
