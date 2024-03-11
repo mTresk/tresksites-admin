@@ -1,4 +1,13 @@
 .p-editor-container {
+	.ql-snow {
+		a {
+			color: $mainColor;
+
+			.dark & {
+				color: $whiteColor;
+			}
+		}
+	}
 	.p-editor-toolbar {
 		background: $editorToolbarBg;
 		border-top-right-radius: $borderRadius;
@@ -11,6 +20,7 @@
 
 		&.ql-snow {
 			border: $editorToolbarBorder;
+
 
 			.ql-stroke {
 				stroke: $editorToolbarIconColor;
@@ -117,6 +127,7 @@
 			color: $inputTextColor;
 			border-bottom-right-radius: $borderRadius;
 			border-bottom-left-radius: $borderRadius;
+			min-height: 150px;
 
 			.dark & {
 				background: $darkBorderColor;

@@ -13,7 +13,7 @@ import { api } from '@/services/api'
 
 const props = defineProps({
 	errors: [Object, String],
-	service: Object,
+	model: [Object, String],
 })
 
 const emit = defineEmits(['url'])
@@ -30,12 +30,12 @@ const baseUrl = import.meta.env.VITE_BACKEND_URL
 const files = ref([])
 
 function uploadFile(response) {
-	if (!props.service?.url)
+	if (!props.model?.url)
 		emit('url', response)
 }
 
 function revertFile(source, load) {
-	api(`/api/files/upload/${props.service?.url}`, {
+	api(`/api/files/upload/${props.model?.url}`, {
 		method: 'DELETE',
 	})
 	emit('url', null)
@@ -54,21 +54,35 @@ function loadFiles(source, load) {
 }
 
 watch(
-	() => props.service,
+	() => props.model,
 	() => {
 		files.value = [
 			{
-				source: props.service.images.original,
+				source: props.model.images.original,
 				options: {
 					type: 'local',
 					metadata: {
-						poster: props.service.images.original,
+						poster: props.model.images.original,
 					},
 				},
 			},
 		]
 	},
 )
+
+if (props.model.images) {
+	files.value = [
+		{
+			source: props.model.images?.original,
+			options: {
+				type: 'local',
+				metadata: {
+					poster: props.model.images?.original,
+				},
+			},
+		},
+	]
+}
 </script>
 
 <template>

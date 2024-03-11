@@ -8,8 +8,13 @@ const menuItems = [
 		label: '',
 		items: [
 			{
-				label: 'Сервисы',
-				icon: 'pi pi-sliders-h',
+				label: 'Работы',
+				icon: 'pi pi-briefcase',
+				route: 'works',
+			},
+			{
+				label: 'Услуги',
+				icon: 'pi pi-th-large',
 				route: 'services',
 			},
 		],

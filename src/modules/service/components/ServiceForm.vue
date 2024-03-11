@@ -25,7 +25,7 @@ const { update, create, inProgress } = useApi()
 const service = ref({
 	title: '',
 	description: '',
-	url: '',
+	icon: '',
 })
 
 const queryClient = useQueryClient()
@@ -77,15 +77,15 @@ onMounted(() => {
 			<VFormField wide>
 				<label class="form__label" for="file">Иконка</label>
 				<VFileUpload
-					:service="service"
+					:model="service"
 					:errors="errors"
 					@url="
-						(url) => {
-							service.url = url
+						(icon) => {
+							service.icon = icon
 						}
 					"
 				/>
-				<small v-if="errors?.url" id="text-error" class="p-error">{{ errors?.url[0] || '&nbsp;' }}</small>
+				<small v-if="errors?.icon" id="text-error" class="p-error">{{ errors?.icon[0] || '&nbsp;' }}</small>
 			</VFormField>
 			<VFormField wide>
 				<span class="p-float-label">

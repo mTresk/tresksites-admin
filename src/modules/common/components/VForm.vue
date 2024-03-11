@@ -134,14 +134,23 @@ defineEmits(['formSubmit'])
 		align-items: center;
 		justify-content: space-between;
 		width: 100%;
+		margin-top: rem(15);
 
 		&:not(:last-child) {
 			margin-bottom: rem(15);
 		}
 	}
 
-	&__label {
+	&__body {
 		width: 100%;
+		padding: 20px;
+	}
+
+	&__block {
+		position: relative;
+		width: 100%;
+		margin-top: rem(20);
+		margin-bottom: rem(40);
 
 		input {
 			width: 100%;
