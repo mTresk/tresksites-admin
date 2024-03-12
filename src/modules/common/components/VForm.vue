@@ -137,7 +137,7 @@ defineEmits(['formSubmit'])
 		margin-top: rem(15);
 
 		&:not(:last-child) {
-			margin-bottom: rem(15);
+			margin-bottom: rem(30);
 		}
 	}
 
@@ -155,6 +155,14 @@ defineEmits(['formSubmit'])
 		input {
 			width: 100%;
 		}
+	}
+
+	&__line {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		width: 100%;
+
+		@include adaptiveValue("gap",20 ,10 );
 	}
 
 	&__button {
