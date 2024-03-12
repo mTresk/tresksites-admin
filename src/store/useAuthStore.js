@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useLocalStorage } from '../composables/useLocalStorage'
 import { useNotificationsStore } from './useNotificationsStore'
-import { api } from '@/services/api'
+import { api } from '@/utils/api'
 
 export const useAuthStore = defineStore('auth', () => {
 	const inProgress = ref(false)

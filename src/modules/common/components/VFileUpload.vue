@@ -9,7 +9,7 @@ import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type'
 import FilePondPluginGetFile from 'filepond-plugin-get-file'
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview'
 import vueFilePond from 'vue-filepond'
-import { api } from '@/services/api'
+import { api } from '@/utils/api'
 
 const props = defineProps({
 	errors: [Object, String],

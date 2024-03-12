@@ -1,7 +1,7 @@
 import { ref } from 'vue'
 import { useConfirm } from 'primevue/useconfirm'
 import { useRouter } from 'vue-router'
-import { api } from '../services/api'
+import { api } from '../utils/api'
 import { useNotificationsStore } from '../store/useNotificationsStore'
 import { useAuthStore } from '@/store/useAuthStore'
 
