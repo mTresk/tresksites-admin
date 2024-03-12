@@ -27,6 +27,11 @@ const menuItems = [
 				icon: 'pi pi-id-card',
 				route: 'contacts',
 			},
+			{
+				label: 'Политика',
+				icon: 'pi pi-file',
+				route: 'policy',
+			},
 		],
 	},
 ]
