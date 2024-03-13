@@ -25,7 +25,7 @@ const { update, create, inProgress } = useApi()
 const service = ref({
 	title: '',
 	description: '',
-	icon: '',
+	galleryId: '',
 })
 
 const queryClient = useQueryClient()
@@ -80,12 +80,12 @@ onMounted(() => {
 					:model="service"
 					:errors="errors"
 					@url="
-						(icon) => {
-							service.icon = icon
+						(galleryId) => {
+							service.galleryId = galleryId
 						}
 					"
 				/>
-				<small v-if="errors?.icon" id="text-error" class="p-error">{{ errors?.icon[0] || '&nbsp;' }}</small>
+				<small v-if="errors?.galleryId" id="text-error" class="p-error">{{ errors?.galleryId[0] || '&nbsp;' }}</small>
 			</VFormField>
 			<VFormField wide>
 				<span class="p-float-label">

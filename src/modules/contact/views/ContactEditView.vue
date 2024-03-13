@@ -26,7 +26,7 @@ const contacts = ref({
 	inn: '',
 	email: '',
 	telegram: '',
-	brief: '',
+	galleryId: '',
 	block: [],
 })
 
@@ -178,12 +178,12 @@ useHead({
 					:model="contacts"
 					:errors="errors"
 					@url="
-						(brief) => {
-							contacts.brief = brief
+						(galleryId) => {
+							contacts.galleryId = galleryId
 						}
 					"
 				/>
-				<small v-if="errors?.brief" id="text-error" class="p-error">{{ errors?.brief[0] || '&nbsp;' }}</small>
+				<small v-if="errors?.galleryId" id="text-error" class="p-error">{{ errors?.galleryId[0] || '&nbsp;' }}</small>
 			</VFormField>
 		</template>
 		<template #footer>

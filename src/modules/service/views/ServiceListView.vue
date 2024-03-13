@@ -151,9 +151,9 @@ useHead({
 					</span>
 				</div>
 			</template>
-			<Column field="images.original" header="Изображение">
+			<Column header="Изображение">
 				<template #body="{ data }">
-					<img :alt="data.title" :src="data.images.original" style="width: 46px; height: 46px; object-fit: cover; border-radius: 50%;">
+					<img :alt="data.title" :src="data.files.original" style="width: 46px; height: 46px; object-fit: cover; border-radius: 50%;">
 				</template>
 			</Column>
 			<Column field="title" header="Заголовок" sortable />

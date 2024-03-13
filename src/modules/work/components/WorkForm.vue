@@ -37,7 +37,7 @@ const work = ref({
 	isFeatured: false,
 	list: '',
 	content: [],
-	featuredImage: '',
+	galleryId: '',
 })
 
 const queryClient = useQueryClient()
@@ -108,12 +108,12 @@ onMounted(() => {
 					:model="work"
 					:errors="errors"
 					@url="
-						(featuredImage) => {
-							work.featuredImage = featuredImage
+						(galleryId) => {
+							work.galleryId = galleryId
 						}
 					"
 				/>
-				<small v-if="errors?.featuredImage" id="text-error" class="p-error">{{ errors?.featuredImage[0] || '&nbsp;' }}</small>
+				<small v-if="errors?.galleryId" id="text-error" class="p-error">{{ errors?.galleryId[0] || '&nbsp;' }}</small>
 			</VFormField>
 			<VFormField>
 				<span class="p-float-label">
