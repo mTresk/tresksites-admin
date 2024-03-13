@@ -30,7 +30,7 @@ const baseUrl = import.meta.env.VITE_BACKEND_URL
 const files = ref([])
 
 function uploadFile(response) {
-	if (!props.model?.url)
+	if (!props.model?.galleryId)
 		emit('url', response)
 }
 

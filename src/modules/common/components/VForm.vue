@@ -5,6 +5,7 @@ defineProps({
 	isLoading: Boolean,
 	singleColumn: Boolean,
 	wide: Boolean,
+	footer: Boolean,
 })
 
 defineEmits(['formSubmit'])
@@ -18,7 +19,7 @@ defineEmits(['formSubmit'])
 			<div class="form__body">
 				<slot name="body" />
 			</div>
-			<div class="form__footer">
+			<div v-if="footer" class="form__footer">
 				<slot name="footer" />
 			</div>
 		</form>
@@ -27,23 +28,6 @@ defineEmits(['formSubmit'])
 
 <style lang="scss">
 .form {
-	position: relative;
-	padding-top: rem(40);
-	background-color: $whiteColor;
-	border: 1px solid rgb(3 7 18 / 6%);
-	border-radius: rem(15);
-
-	@include adaptiveValue('padding-inline', 30, 15);
-	@include adaptiveValue('padding-bottom', 40, 30);
-
-	.dark & {
-		background-color: $darkColor;
-	}
-
-	&:not(:last-child) {
-		@include adaptiveValue('margin-bottom', 50, 30);
-	}
-
 	// .form__body
 	&__body {
 		display: grid;
@@ -98,7 +82,7 @@ defineEmits(['formSubmit'])
 		gap: rem(15);
 		align-items: center;
 
-		@include adaptiveValue('margin-top', 35, 30);
+		@include adaptiveValue('margin-top', 25, 20);
 	}
 
 	&--vertical {
@@ -163,10 +147,6 @@ defineEmits(['formSubmit'])
 		width: 100%;
 
 		@include adaptiveValue("gap",20 ,10 );
-	}
-
-	&__button {
-		margin-top: rem(10);
 	}
 }
 

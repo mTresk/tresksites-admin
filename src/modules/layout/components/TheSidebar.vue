@@ -58,7 +58,8 @@ const { closeSidebar } = useSidebarStore()
 		}
 
 	&__header {
-		position: relative;
+		position: sticky;
+		top: 0;
     	z-index: 10;
 		display: flex;
 		align-items: center;
@@ -74,8 +75,6 @@ const { closeSidebar } = useSidebarStore()
 
 	// .sidebar__logo
 	&__logo {
-		position: sticky;
-		top: 0;
 		z-index: 1;
 		display: flex;
 		align-items: center;

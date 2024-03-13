@@ -81,116 +81,120 @@ useHead({
 			{{ title }}
 		</template>
 	</VPageHeader>
-	<VForm :is-loading="isLoading" single-column @form-submit="handleUpdate">
-		<template #body>
-			<VFormField wide="">
-				<span class="p-float-label">
-					<InputText
-						id="name"
-						v-model="contacts.name"
-						type="text"
-						:class="{ 'p-invalid': errors?.name }"
-						aria-describedby="text-error"
-					/>
-					<label for="name">Имя</label>
-				</span>
-				<small v-if="errors?.name" id="text-error" class="p-error">{{ errors?.name[0] || '&nbsp;' }}</small>
-			</VFormField>
-			<VFormField wide>
-				<span class="p-float-label">
-					<InputText
-						id="inn"
-						v-model="contacts.inn"
-						type="text"
-						:class="{ 'p-invalid': errors?.inn }"
-						aria-describedby="text-error"
-					/>
-					<label for="inn">ИНН</label>
-				</span>
-				<small v-if="errors?.inn" id="text-error" class="p-error">{{ errors?.inn[0] || '&nbsp;' }}</small>
-			</VFormField>
-			<VFormField wide>
-				<span class="p-float-label">
-					<InputText
-						id="email"
-						v-model="contacts.email"
-						type="text"
-						:class="{ 'p-invalid': errors?.email }"
-						aria-describedby="text-error"
-					/>
-					<label for="email">Email</label>
-				</span>
-				<small v-if="errors?.email" id="text-error" class="p-error">{{ errors?.email[0] || '&nbsp;' }}</small>
-			</VFormField>
-			<VFormField wide>
-				<span class="p-float-label">
-					<InputText
-						id="telegram"
-						v-model="contacts.telegram"
-						type="text"
-						:class="{ 'p-invalid': errors?.telegram }"
-						aria-describedby="text-error"
-					/>
-					<label for="telegram">Телеграм</label>
-				</span>
-				<small v-if="errors?.telegram" id="text-error" class="p-error">{{ errors?.telegram[0] || '&nbsp;' }}</small>
-			</VFormField>
-			<VFormField wide>
-				<span class="p-float-label">
-					<label>Информация</label>
-				</span>
-				<small v-if="errors?.block" id="text-error" class="p-error">{{ errors?.block[0] || '&nbsp;' }}</small>
-				<div v-for="(block, index) in contacts.block" :id="index + 1" :key="index" class="card__item">
-					<div class="card__body p-card">
-						<Editor
-							id="list"
-							:key="index"
-							v-model="contacts.block[index].content"
-							editor-style="min-height: auto; font-size: 16px"
-						>
-							<template #toolbar>
-								<span class="ql-formats">
-									<select class="ql-header">
-										<option selected />
-										<option value="1" />
-										<option value="2" />
-										<option value="3" />
-									</select>
-								</span>
-								<span class="ql-formats">
-									<button class="ql-bold" />
-									<button class="ql-italic" />
-									<button class="ql-underline" />
-								</span>
-								<span class="ql-formats">
-									<button class="ql-list" value="ordered" />
-									<button class="ql-list" value="bullet" />
-									<button class="ql-link" />
-								</span>
-							</template>
-						</Editor>
-					</div>
-				</div>
-			</VFormField>
-			<VFormField wide>
-				<label class="form__label" for="file">Бриф</label>
-				<VFileUpload
-					:model="contacts"
-					:errors="errors"
-					@url="
-						(galleryId) => {
-							contacts.galleryId = galleryId
-						}
-					"
-				/>
-				<small v-if="errors?.galleryId" id="text-error" class="p-error">{{ errors?.galleryId[0] || '&nbsp;' }}</small>
-			</VFormField>
+	<Card>
+		<template #content>
+			<VForm footer :is-loading="isLoading" single-column @form-submit="handleUpdate">
+				<template #body>
+					<VFormField wide="">
+						<span class="p-float-label">
+							<InputText
+								id="name"
+								v-model="contacts.name"
+								type="text"
+								:class="{ 'p-invalid': errors?.name }"
+								aria-describedby="text-error"
+							/>
+							<label for="name">Имя</label>
+						</span>
+						<small v-if="errors?.name" id="text-error" class="p-error">{{ errors?.name[0] || '&nbsp;' }}</small>
+					</VFormField>
+					<VFormField wide>
+						<span class="p-float-label">
+							<InputText
+								id="inn"
+								v-model="contacts.inn"
+								type="text"
+								:class="{ 'p-invalid': errors?.inn }"
+								aria-describedby="text-error"
+							/>
+							<label for="inn">ИНН</label>
+						</span>
+						<small v-if="errors?.inn" id="text-error" class="p-error">{{ errors?.inn[0] || '&nbsp;' }}</small>
+					</VFormField>
+					<VFormField wide>
+						<span class="p-float-label">
+							<InputText
+								id="email"
+								v-model="contacts.email"
+								type="text"
+								:class="{ 'p-invalid': errors?.email }"
+								aria-describedby="text-error"
+							/>
+							<label for="email">Email</label>
+						</span>
+						<small v-if="errors?.email" id="text-error" class="p-error">{{ errors?.email[0] || '&nbsp;' }}</small>
+					</VFormField>
+					<VFormField wide>
+						<span class="p-float-label">
+							<InputText
+								id="telegram"
+								v-model="contacts.telegram"
+								type="text"
+								:class="{ 'p-invalid': errors?.telegram }"
+								aria-describedby="text-error"
+							/>
+							<label for="telegram">Телеграм</label>
+						</span>
+						<small v-if="errors?.telegram" id="text-error" class="p-error">{{ errors?.telegram[0] || '&nbsp;' }}</small>
+					</VFormField>
+					<VFormField wide>
+						<span class="p-float-label">
+							<label>Информация</label>
+						</span>
+						<small v-if="errors?.block" id="text-error" class="p-error">{{ errors?.block[0] || '&nbsp;' }}</small>
+						<div v-for="(block, index) in contacts.block" :id="index + 1" :key="index" class="card__item">
+							<div class="card__body p-card">
+								<Editor
+									id="list"
+									:key="index"
+									v-model="contacts.block[index].content"
+									editor-style="min-height: auto; font-size: 16px"
+								>
+									<template #toolbar>
+										<span class="ql-formats">
+											<select class="ql-header">
+												<option selected />
+												<option value="1" />
+												<option value="2" />
+												<option value="3" />
+											</select>
+										</span>
+										<span class="ql-formats">
+											<button class="ql-bold" />
+											<button class="ql-italic" />
+											<button class="ql-underline" />
+										</span>
+										<span class="ql-formats">
+											<button class="ql-list" value="ordered" />
+											<button class="ql-list" value="bullet" />
+											<button class="ql-link" />
+										</span>
+									</template>
+								</Editor>
+							</div>
+						</div>
+					</VFormField>
+					<VFormField wide>
+						<label class="form__label" for="file">Бриф</label>
+						<VFileUpload
+							:model="contacts"
+							:errors="errors"
+							@url="
+								(galleryId) => {
+									contacts.galleryId = galleryId
+								}
+							"
+						/>
+						<small v-if="errors?.galleryId" id="text-error" class="p-error">{{ errors?.galleryId[0] || '&nbsp;' }}</small>
+					</VFormField>
+				</template>
+				<template #footer>
+					<Button :loading="inProgress" type="submit" label="Сохранить" size="small" />
+					<router-link :to="{ name: 'dashboard' }">
+						<Button type="button" label="Отмена" severity="plain" outlined size="small" />
+					</router-link>
+				</template>
+			</VForm>
 		</template>
-		<template #footer>
-			<Button :loading="inProgress" type="submit" label="Сохранить" size="small" />
-			<router-link :to="{ name: 'dashboard' }">
-				<Button type="button" label="Отмена" severity="plain" outlined size="small" />
-			</router-link>
-		</template>
-	</VForm>
+	</Card>
 </template>

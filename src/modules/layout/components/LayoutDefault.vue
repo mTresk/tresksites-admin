@@ -33,5 +33,19 @@ import TheSidebar from '@/modules/layout/components/TheSidebar.vue'
 
 	@include adaptiveValue('padding-top', 50, 30);
 	@include adaptiveValue('padding-bottom', 50, 30);
+
+	&__body {
+		display: flex;
+		gap: rem(30);
+		align-items: flex-start;
+	}
+
+	&__content {
+		flex: 0 1 rem(800)
+	}
+
+	&__sidebar {
+		flex: 0 1 rem(400)
+	}
 }
 </style>

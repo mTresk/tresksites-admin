@@ -5,6 +5,7 @@ import Button from 'primevue/button'
 import InputText from 'primevue/inputtext'
 import { useRoute } from 'vue-router'
 import Textarea from 'primevue/textarea'
+import Card from 'primevue/card'
 import VFileUpload from '@/modules/common/components/VFileUpload.vue'
 import VForm from '@/modules/common/components/VForm.vue'
 import VFormField from '@/modules/common/components/VFormField.vue'
@@ -72,53 +73,57 @@ onMounted(() => {
 </script>
 
 <template>
-	<VForm :is-loading="isLoading" @form-submit="props.serviceProps?.id ? handleUpdate() : handleCreate()">
-		<template #body>
-			<VFormField wide>
-				<label class="form__label" for="file">Иконка</label>
-				<VFileUpload
-					:model="service"
-					:errors="errors"
-					@url="
-						(galleryId) => {
-							service.galleryId = galleryId
-						}
-					"
-				/>
-				<small v-if="errors?.galleryId" id="text-error" class="p-error">{{ errors?.galleryId[0] || '&nbsp;' }}</small>
-			</VFormField>
-			<VFormField wide>
-				<span class="p-float-label">
-					<InputText
-						id="title"
-						v-model="service.title"
-						type="text"
-						:class="{ 'p-invalid': errors?.title }"
-						aria-describedby="text-error"
-					/>
-					<label for="title">Заголовок</label>
-				</span>
-				<small v-if="errors?.title" id="text-error" class="p-error">{{ errors?.title[0] || '&nbsp;' }}</small>
-			</VFormField>
-			<VFormField wide>
-				<span class="p-float-label">
-					<Textarea
-						id="description"
-						v-model="service.description"
-						type="text"
-						:class="{ 'p-invalid': errors?.description }"
-						aria-describedby="text-error"
-					/>
-					<label for="description">Описание</label>
-				</span>
-				<small v-if="errors?.description" id="text-error" class="p-error">{{ errors?.description[0] || '&nbsp;' }}</small>
-			</VFormField>
+	<Card>
+		<template #content>
+			<VForm footer :is-loading="isLoading" @form-submit="props.serviceProps?.id ? handleUpdate() : handleCreate()">
+				<template #body>
+					<VFormField wide>
+						<label class="form__label" for="file">Иконка</label>
+						<VFileUpload
+							:model="service"
+							:errors="errors"
+							@url="
+								(galleryId) => {
+									service.galleryId = galleryId
+								}
+							"
+						/>
+						<small v-if="errors?.galleryId" id="text-error" class="p-error">{{ errors?.galleryId[0] || '&nbsp;' }}</small>
+					</VFormField>
+					<VFormField wide>
+						<span class="p-float-label">
+							<InputText
+								id="title"
+								v-model="service.title"
+								type="text"
+								:class="{ 'p-invalid': errors?.title }"
+								aria-describedby="text-error"
+							/>
+							<label for="title">Заголовок</label>
+						</span>
+						<small v-if="errors?.title" id="text-error" class="p-error">{{ errors?.title[0] || '&nbsp;' }}</small>
+					</VFormField>
+					<VFormField wide>
+						<span class="p-float-label">
+							<Textarea
+								id="description"
+								v-model="service.description"
+								type="text"
+								:class="{ 'p-invalid': errors?.description }"
+								aria-describedby="text-error"
+							/>
+							<label for="description">Описание</label>
+						</span>
+						<small v-if="errors?.description" id="text-error" class="p-error">{{ errors?.description[0] || '&nbsp;' }}</small>
+					</VFormField>
+				</template>
+				<template #footer>
+					<Button :loading="inProgress" type="submit" label="Сохранить" size="small" />
+					<router-link :to="{ name: 'services' }">
+						<Button type="button" label="Отмена" severity="plain" outlined size="small" />
+					</router-link>
+				</template>
+			</VForm>
 		</template>
-		<template #footer>
-			<Button :loading="inProgress" type="submit" label="Сохранить" size="small" />
-			<router-link :to="{ name: 'services' }">
-				<Button type="button" label="Отмена" severity="plain" outlined size="small" />
-			</router-link>
-		</template>
-	</VForm>
+	</Card>
 </template>

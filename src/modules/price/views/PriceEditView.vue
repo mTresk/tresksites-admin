@@ -90,79 +90,83 @@ useHead({
 			{{ title }}
 		</template>
 	</VPageHeader>
-	<VForm :is-loading="isLoading" single-column @form-submit="handleUpdate">
-		<template #body>
-			<VFormField wide="">
-				<span class="p-float-label">
-					<InputText
-						id="title"
-						v-model="prices.title"
-						type="text"
-						:class="{ 'p-invalid': errors?.title }"
-						aria-describedby="text-error"
-					/>
-					<label for="title">Заголовок</label>
-				</span>
-				<small v-if="errors?.title" id="text-error" class="p-error">{{ errors?.title[0] || '&nbsp;' }}</small>
-			</VFormField>
-			<VFormField wide>
-				<span class="p-float-label">
-					<Textarea
-						id="description"
-						v-model="prices.description"
-						type="text"
-						:class="{ 'p-invalid': errors?.description }"
-						aria-describedby="text-error"
-					/>
-					<label for="description">Описание</label>
-				</span>
-				<small v-if="errors?.description" id="text-error" class="p-error">{{ errors?.description[0] || '&nbsp;' }}</small>
-			</VFormField>
-			<Card class="card">
-				<template #title>
-					Цены
-				</template>
-				<template #content>
-					<div v-for="(block, index) in prices.block" :id="index + 1" :key="index" class="card__item">
-						<div class="card__line">
-							<span class="p-float-label">
-								<InputText
-									id="service"
-									v-model="prices.block[index].service"
-									type="text"
-									aria-describedby="text-error"
-								/>
-								<label for="service">Услуга</label>
-							</span>
-							<span class="p-float-label">
-								<InputText
-									id="price"
-									v-model="prices.block[index].price"
-									type="text"
-									aria-describedby="text-error"
-								/>
-								<label for="price">Цена</label>
-							</span>
-						</div>
+	<Card>
+		<template #content>
+			<VForm footer :is-loading="isLoading" single-column @form-submit="handleUpdate">
+				<template #body>
+					<VFormField wide="">
+						<span class="p-float-label">
+							<InputText
+								id="title"
+								v-model="prices.title"
+								type="text"
+								:class="{ 'p-invalid': errors?.title }"
+								aria-describedby="text-error"
+							/>
+							<label for="title">Заголовок</label>
+						</span>
+						<small v-if="errors?.title" id="text-error" class="p-error">{{ errors?.title[0] || '&nbsp;' }}</small>
+					</VFormField>
+					<VFormField wide>
+						<span class="p-float-label">
+							<Textarea
+								id="description"
+								v-model="prices.description"
+								type="text"
+								:class="{ 'p-invalid': errors?.description }"
+								aria-describedby="text-error"
+							/>
+							<label for="description">Описание</label>
+						</span>
+						<small v-if="errors?.description" id="text-error" class="p-error">{{ errors?.description[0] || '&nbsp;' }}</small>
+					</VFormField>
+					<Card class="card">
+						<template #title>
+							Цены
+						</template>
+						<template #content>
+							<div v-for="(block, index) in prices.block" :id="index + 1" :key="index" class="card__item">
+								<div class="card__line">
+									<span class="p-float-label">
+										<InputText
+											id="service"
+											v-model="prices.block[index].service"
+											type="text"
+											aria-describedby="text-error"
+										/>
+										<label for="service">Услуга</label>
+									</span>
+									<span class="p-float-label">
+										<InputText
+											id="price"
+											v-model="prices.block[index].price"
+											type="text"
+											aria-describedby="text-error"
+										/>
+										<label for="price">Цена</label>
+									</span>
+								</div>
 
-						<Button
-							icon="pi pi-times"
-							severity="danger"
-							text
-							rounded
-							aria-label="Удалить"
-							@click="removeField(index)"
-						/>
-					</div>
-					<Button class="card__button" label="Добавить" severity="success" size="small" @click="addField" />
+								<Button
+									icon="pi pi-times"
+									severity="danger"
+									text
+									rounded
+									aria-label="Удалить"
+									@click="removeField(index)"
+								/>
+							</div>
+							<Button class="card__button" label="Добавить" severity="success" size="small" @click="addField" />
+						</template>
+					</Card>
 				</template>
-			</Card>
+				<template #footer>
+					<Button :loading="inProgress" type="submit" label="Сохранить" size="small" />
+					<router-link :to="{ name: 'dashboard' }">
+						<Button type="button" label="Отмена" severity="plain" outlined size="small" />
+					</router-link>
+				</template>
+			</VForm>
 		</template>
-		<template #footer>
-			<Button :loading="inProgress" type="submit" label="Сохранить" size="small" />
-			<router-link :to="{ name: 'dashboard' }">
-				<Button type="button" label="Отмена" severity="plain" outlined size="small" />
-			</router-link>
-		</template>
-	</VForm>
+	</Card>
 </template>

@@ -1,9 +1,7 @@
 <script setup>
-import { onMounted, ref, watch } from 'vue'
 import Button from 'primevue/button'
 import Column from 'primevue/column'
 import DataTable from 'primevue/datatable'
-import InputText from 'primevue/inputtext'
 import { useHead } from 'unhead'
 import { useQuery } from '@tanstack/vue-query'
 import { useRouter } from 'vue-router'
@@ -16,41 +14,12 @@ const title = 'Работы'
 
 const breadcrumbs = [{ label: title }]
 
-const totalRecords = ref()
-
-const lazyParams = ref({})
-
-const filters = ref()
-
 const router = useRouter()
 
 const { fetch } = useApi()
 
-const page = ref(1)
-
-function initFilters() {
-	filters.value = {
-		global: { value: '', matchMode: 'contains' },
-	}
-
-	lazyParams.value = {
-		sortField: 'createdAt',
-		sortOrder: -1,
-		filters: filters.value,
-	}
-}
-initFilters()
-
 async function getWorks() {
-	lazyParams.value.filters = filters.value
-
-	if (!lazyParams.value.sortField)
-		lazyParams.value.sortField = 'createdAt'
-
-	if (![-1, 1].includes(lazyParams.value.sortOrder))
-		lazyParams.value.sortOrder = -1
-
-	const { data } = await fetch('works', lazyParams.value, ['name', 'email'])
+	const { data } = await fetch('works')
 
 	return data
 }
@@ -58,52 +27,15 @@ async function getWorks() {
 const {
 	isLoading,
 	data: works,
-	refetch,
 } = useQuery({
-	queryKey: ['works', page],
+	queryKey: ['works'],
 	queryFn: getWorks,
 	keepPreviousData: true,
 })
 
-function onPage(event) {
-	page.value = event.page + 1
-	lazyParams.value = event
-}
-
-function onSort(event) {
-	lazyParams.value = event
-	refetch()
-}
-
-function onFilter() {
-	lazyParams.value.filters = filters.value
-	refetch()
-}
-
-function onUpdateRows(event) {
-	lazyParams.value.rows = event
-	refetch()
-}
-
-function clearFilter() {
-	initFilters()
-	onFilter()
-}
-
 function edit(event) {
-	router.push({ name: 'works.edit', params: { id: event.data.id } })
+	router.push({ name: 'works.edit', params: { slug: event.data.slug } })
 }
-
-watch(
-	() => works.value,
-	() => {
-		totalRecords.value = works.value?.total
-	},
-)
-
-onMounted(() => {
-	totalRecords.value = works.value?.total
-})
 
 useHead({
 	title,
@@ -123,36 +55,18 @@ useHead({
 	</VPageHeader>
 	<VTable :is-loading="isLoading">
 		<DataTable
-			v-model:filters="filters"
-			state-storage="session"
-			state-key="config-list-session"
-			:rows-per-page-options="[10, 50, 1000]"
 			selection-mode="single"
-			removable-sort
-			lazy
-			:value="works"
-			filter-display="row"
-			:paginator="totalRecords > 10 ? true : false"
-			:total-records="totalRecords"
-			:first="0"
-			:rows="10"
+			:value="works?.data"
 			data-key="id"
 			@row-select="edit"
-			@page="onPage($event)"
-			@sort="onSort($event)"
-			@update:rows="onUpdateRows($event)"
 		>
-			<template #header>
-				<div class="table__header">
-					<Button type="button" icon="pi pi-filter-slash" label="Очистить" outlined @click="clearFilter()" />
-					<span class="p-input-icon-left">
-						<i class="pi pi-search" />
-						<InputText v-model="filters.global.value" placeholder="Поиск" name="search" @keyup="onFilter" />
-					</span>
-				</div>
-			</template>
-			<Column field="name" header="Название" sortable />
-			<Column field="createdAt" header="Дата создания" sortable>
+			<Column header="Изображение">
+				<template #body="{ data }">
+					<img :alt="data.title" :src="data.files.original" style="width: auto; height: 46px; object-fit: cover;">
+				</template>
+			</Column>
+			<Column field="name" header="Название" />
+			<Column field="createdAt" header="Дата создания">
 				<template #body="{ data }">
 					<span>{{ data.createdAt ? convertDate(data.createdAt) : '-' }}</span>
 				</template>

@@ -18,20 +18,20 @@ const { fetch, destroy } = useApi()
 const queryClient = useQueryClient()
 
 async function getWork() {
-	const { data } = await fetch(`works/${route.params.id}`)
+	const { data } = await fetch(`works/${route.params.slug}`)
 
 	return data
 }
 
 const { isLoading, data: work } = useQuery({
-	queryKey: ['works', route.params.id],
+	queryKey: ['works', route.params.slug],
 	queryFn: getWork,
 	refetchOnMount: true,
 })
 
 const { mutate: mutateDelete } = useMutation({
 	mutationFn: async () => {
-		await destroy(`works/${route.params.id}`, 'works')
+		await destroy(`works/${route.params.slug}`, 'works')
 	},
 	onSuccess: async () => {
 		await queryClient.resetQueries({ queryKey: ['works'] })
