@@ -21,7 +21,7 @@ const errors = ref()
 const form = reactive({
 	email: '',
 	password: '',
-	remember: false,
+	remember: true,
 })
 
 async function formSubmit() {
