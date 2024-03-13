@@ -8,16 +8,16 @@ const router = createRouter({
 	routes,
 })
 
-// router.beforeEach(async (to) => {
-// 	const { user } = storeToRefs(useAuthStore())
+router.beforeEach(async (to) => {
+	const { user } = storeToRefs(useAuthStore())
 
-// 	await useAuthStore().verifysession()
+	await useAuthStore().verifysession()
 
-// 	if (!user.value && to.name !== 'login')
-// 		return { name: 'login' }
+	if (!user.value && to.name !== 'login')
+		return { name: 'login' }
 
-// 	if (user.value && to.name === 'login')
-// 		return { name: 'dashboard' }
-// })
+	if (user.value && to.name === 'login')
+		return { name: 'dashboard' }
+})
 
 export default router

@@ -4,6 +4,8 @@ import { workRoutes } from '@/modules/work/routes'
 import { contactRoutes } from '@/modules/contact/routes'
 import { priceRoutes } from '@/modules/price/routes'
 import { policyRoutes } from '@/modules/policy/routes'
+import { orderRoutes } from '@/modules/order/routes'
+import { loginRoutes } from '@/modules/auth/routes'
 
 export const routes = [
 	...serviceRoutes,
@@ -12,4 +14,6 @@ export const routes = [
 	...contactRoutes,
 	...priceRoutes,
 	...policyRoutes,
+	...orderRoutes,
+	...loginRoutes,
 ]

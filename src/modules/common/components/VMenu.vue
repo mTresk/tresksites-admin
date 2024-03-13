@@ -18,6 +18,11 @@ const menuItems = [
 				route: 'services',
 			},
 			{
+				label: 'Заказы',
+				icon: 'pi pi-book',
+				route: 'orders',
+			},
+			{
 				label: 'Цены',
 				icon: 'pi pi-dollar',
 				route: 'prices',

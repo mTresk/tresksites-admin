@@ -83,6 +83,23 @@ if (props.model.files) {
 		},
 	]
 }
+
+watch(
+	() => props.model.attachment,
+	() => {
+		files.value = [
+			{
+				source: props.model.attachment,
+				options: {
+					type: 'local',
+					metadata: {
+						poster: props.model.attachment,
+					},
+				},
+			},
+		]
+	},
+)
 </script>
 
 <template>

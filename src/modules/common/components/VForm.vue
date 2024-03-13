@@ -159,6 +159,10 @@ defineEmits(['formSubmit'])
 	// .checkbox__label
 	&__label {
 		@include adaptiveValue('font-size', 14, 12);
+
+		.dark & {
+			color: $whiteColor;
+		}
 	}
 }
 </style>

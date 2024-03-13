@@ -15,7 +15,7 @@
 	.p-card-title {
 		font-size: $cardTitleFontSize;
 		font-weight: $cardTitleFontWeight;
-		margin-bottom: $inlineSpacing;
+		margin-bottom: rem(20);
 
 		.dark & {
 			color: $whiteColor;
