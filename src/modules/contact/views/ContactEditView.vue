@@ -19,6 +19,8 @@ const breadcrumbs = [{ label: title }]
 
 const errors = ref()
 
+const field = ref({})
+
 const { fetch, update, inProgress } = useApi()
 
 const contacts = ref({
@@ -54,6 +56,15 @@ const { mutate: mutateUpdate } = useMutation({
 
 function handleUpdate() {
 	mutateUpdate()
+}
+
+function addField() {
+	contacts.value.block.push(field.value)
+	field.value = {}
+}
+
+function removeField(index) {
+	contacts.value.block.splice(index, 1)
 }
 
 function cloneData() {
@@ -138,12 +149,9 @@ useHead({
 						<small v-if="errors?.telegram" id="text-error" class="p-error">{{ errors?.telegram[0] || '&nbsp;' }}</small>
 					</VFormField>
 					<VFormField wide>
-						<span class="p-float-label">
-							<label>Информация</label>
-						</span>
 						<small v-if="errors?.block" id="text-error" class="p-error">{{ errors?.block[0] || '&nbsp;' }}</small>
 						<div v-for="(block, index) in contacts.block" :id="index + 1" :key="index" class="card__item">
-							<div class="card__body p-card">
+							<VFormField wide>
 								<Editor
 									id="list"
 									:key="index"
@@ -171,8 +179,18 @@ useHead({
 										</span>
 									</template>
 								</Editor>
-							</div>
+							</VFormField>
+
+							<Button
+								icon="pi pi-times"
+								severity="danger"
+								text
+								rounded
+								aria-label="Удалить"
+								@click="removeField(index)"
+							/>
 						</div>
+						<Button class="card__button" label="Добавить" severity="success" size="small" @click="addField" />
 					</VFormField>
 					<VFormField wide>
 						<label class="form__label" for="file">Бриф</label>
