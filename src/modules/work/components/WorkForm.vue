@@ -110,7 +110,6 @@ onMounted(() => {
 			<template #title>
 				Контент
 			</template>
-			{{ work.galleryId }}
 			<template #content>
 				<VForm footer :is-loading="isLoading" @form-submit="props.workProps?.id ? handleUpdate() : handleCreate()">
 					<template #body>
