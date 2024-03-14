@@ -36,16 +36,30 @@ import TheSidebar from '@/modules/layout/components/TheSidebar.vue'
 
 	&__body {
 		display: flex;
-		gap: rem(30);
 		align-items: flex-start;
+
+		@include adaptiveValue("gap",30 ,15 );
+
+		@media (max-width:$tablet){
+			flex-direction: column;
+		}
 	}
 
 	&__content {
-		flex: 0 1 rem(800)
+		flex: 0 1 rem(800);
+
+		@media (max-width:$tablet){
+			flex: 1 1 auto;
+		}
 	}
 
 	&__sidebar {
-		flex: 0 1 rem(400)
+		flex: 0 1 rem(400);
+
+		@media (max-width:$tablet){
+			flex: 1 1 auto;
+			width: 100%;
+		}
 	}
 }
 </style>
