@@ -8,6 +8,11 @@ const menuItems = [
 		label: '',
 		items: [
 			{
+				label: 'Инфопанель',
+				icon: 'pi pi-home',
+				route: 'dashboard',
+			},
+			{
 				label: 'Работы',
 				icon: 'pi pi-briefcase',
 				route: 'works',

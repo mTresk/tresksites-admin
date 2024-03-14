@@ -1,6 +1,5 @@
 <script setup>
 import { onMounted, ref, watch } from 'vue'
-import Chart from 'primevue/chart'
 import { useHead } from 'unhead'
 import { useQuery } from '@tanstack/vue-query'
 import UiSpinner from '@/modules/common/components/UiSpinner.vue'
@@ -10,15 +9,11 @@ import { useApi } from '@/composables/useApi'
 
 const title = 'Инфопанель'
 
-const paymentChartData = ref()
-
-const paymentStatsData = ref()
-
-const userChartData = ref()
+const statsData = ref()
 
 const { fetch, isLoading } = useApi()
 
-async function getPayStatsChartData() {
+async function getStats() {
 	const { data } = await fetch('chart/stats')
 
 	return data
@@ -26,65 +21,20 @@ async function getPayStatsChartData() {
 
 const { data: paymentStats } = useQuery({
 	queryKey: ['chart/stats'],
-	queryFn: getPayStatsChartData,
+	queryFn: getStats,
 })
 
-async function getUserChartData() {
-	const { data } = await fetch('chart/users')
-
-	return data
-}
-
-const { data: userChart } = useQuery({
-	queryKey: ['chart/users'],
-	queryFn: getUserChartData,
-})
-
-async function getPaymentsChartData() {
-	const { data } = await fetch('chart/payments')
-
-	return data
-}
-
-const { data: paymentChart } = useQuery({
-	queryKey: ['chart/payments'],
-	queryFn: getPaymentsChartData,
-})
-
-function clonePaymentStats() {
-	if (paymentStats.value)
-		paymentStatsData.value = clone(paymentStats.value)
-}
-
-function cloneUserChart() {
-	if (userChart.value)
-		userChartData.value = clone(userChart.value)
-}
-
-function clonePaymentChart() {
-	if (paymentChart.value)
-		paymentChartData.value = clone(paymentChart.value)
+function cloneStats() {
+	statsData.value = clone(paymentStats.value)
 }
 
 watch(
 	() => paymentStats.value,
-	() => clonePaymentStats(),
-)
-
-watch(
-	() => userChart.value,
-	() => cloneUserChart(),
-)
-
-watch(
-	() => paymentChart.value,
-	() => clonePaymentChart(),
+	() => cloneStats(),
 )
 
 onMounted(() => {
-	clonePaymentStats()
-	cloneUserChart()
-	clonePaymentChart()
+	cloneStats()
 })
 
 useHead({
@@ -102,7 +52,7 @@ useHead({
 		<UiSpinner v-if="isLoading" />
 		<div v-show="!isLoading" class="dashboard">
 			<div class="dashboard__cards">
-				<div v-for="(data, index) in paymentStatsData" :key="index" class="dashboard-card">
+				<div v-for="(data, index) in statsData" :key="index" class="dashboard-card">
 					<div class="dashboard-card__header">
 						{{ data.header.title }}
 					</div>
@@ -115,14 +65,6 @@ useHead({
 						{{ data.content.title }}
 						<span>{{ data.content.value }}</span>
 					</div>
-				</div>
-			</div>
-			<div class="dashboard__charts">
-				<div class="dashboard-chart">
-					<Chart type="line" :data="userChartData" />
-				</div>
-				<div class="dashboard-chart">
-					<Chart type="bar" :data="paymentChartData" />
 				</div>
 			</div>
 		</div>
