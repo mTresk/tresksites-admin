@@ -96,7 +96,7 @@ watch(
 
 watch(
 	() => work.value.name,
-	() => work.value.slug = slug(work.value.name),
+	() => work.value.slug === '' ? work.value.slug = slug(work.value.name) : work.value.slug,
 )
 
 onMounted(() => {
